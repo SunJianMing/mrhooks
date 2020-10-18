@@ -32,8 +32,8 @@ hander.on('error',err=>{
     }
 })
 hander.on('push',event=>{
-    console.log('reactive psuh',event)
-    if(event.payload.ref === 'develop'){
+    console.log('reactive psuh')
+    if(event.payload.ref === 'refs/heads/develop'){
         run_cmd('sh',['./deploy-dev.sh'],text=>{
             console.log(text)
         })

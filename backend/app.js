@@ -6,7 +6,7 @@ app.get('/',(req,res)=>{
 
 app.get('/api/list',(req,res)=>{
     res.json({
-        data:[1,2,3,4,5,6,7,8,9]
+        data:[1,2,3,4,5,6,79]
     })
 })
 app.listen(3000,()=>{
