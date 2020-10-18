@@ -1,6 +1,6 @@
 apps:
     - script: app.js
-      intrances: 2
+      instances: 2
       watch: true
       env:
         NODE_ENV: production
