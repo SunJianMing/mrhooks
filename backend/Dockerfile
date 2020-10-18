@@ -1,4 +1,4 @@
-FROM keymetrics/pm2:latest-apline
+FROM keymetrics/pm2:latest-alpine
 WORKDIR /usr/app
 ADD . /usr/app
 RUN npm config set registry https://registry.npm.taobao.org/ && \
