@@ -20,6 +20,6 @@ app.get('/api/list',(req,res)=>{
     })
 })
 
-app.listen('6000',()=>{
+app.listen(6000,()=>{
     console.log('express at 6000')
 })

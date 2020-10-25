@@ -1,12 +1,12 @@
 const http = require('http')
 const webHooks = require('github-webhook-handler')
+const {spawn} = require('child_process')
 
-const hander = webHooks({
-    path:"/hook-test",
+const handler = webHooks({
+    path:'/hook-test',
     secret:'mrsun'
 })
-const {spawn} = require('child_process')
-function cun_cmd(cmd,arg,call){
+function run_cmd(cmd,arg,call){
     let child = spawn(cmd,arg)
     let resultString = ''
     child.stdout.on('data',chunk=>{
@@ -17,25 +17,23 @@ function cun_cmd(cmd,arg,call){
     })
 }
 http.createServer((req,res)=>{
-    hander(req,res,err=>{
+    handler(req,res,err=>{
         if(err){
-            res.statusCode = 404
-            res.send('not found')
+            res.statusCode = 500
         }
     })
-}).listen(6666,()=>{
-    console.log('6666')
+}).listen(6000,()=>{
+    console.log('start 6000')
 })
 
-
-
-hander.on('error',err=>{
-    console.Error("error",err.message)
+handler.on('error',err=>{
+    console.error('Error',err.message);
 })
-hander.on('push',(event)=>{
-    console.log(event.payload.ref)
-    if(event.payload.ref == 'refs/heads/hook')
-    cun_cmd('sh',['./deplay-dev.sh'],text=>{
-        console.log(text)
-    })
+
+handler.on('push',(event)=>{
+    if(event.payload.ref === 'refs/heads/dev'){
+        run_cmd('sh',['./deplay-dev.sh'],text=>{
+            console.log(text)
+        })
+    }
 })
