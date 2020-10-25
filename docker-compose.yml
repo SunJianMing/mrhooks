@@ -10,3 +10,5 @@ services:
             - ./frontend/dist:/home/hook-test
     hook-test:
         container_name: hook-test
+        restart: always
+        build: ./backend
