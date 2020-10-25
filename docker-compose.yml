@@ -1,0 +1,12 @@
+version: '3'
+services: 
+    nginx: 
+        image: nginx
+        restart: always
+        ports:
+            - 5000:80
+        volumes:
+            - ./nginx/conf.d:/ect/nginx/conf.d
+            - ./frontend/dist:/home/hook-test
+    hook-test:
+        container_name: hook-test
