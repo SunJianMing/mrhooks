@@ -22,8 +22,8 @@ http.createServer((req,res)=>{
             res.statusCode = 500
         }
     })
-}).listen(6000,()=>{
-    console.log('start 6000')
+}).listen(6677,()=>{
+    console.log('start 6677')
 })
 
 handler.on('error',err=>{
