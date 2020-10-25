@@ -32,6 +32,7 @@ handler.on('error',err=>{
 
 handler.on('push',(event)=>{
     if(event.payload.ref === 'refs/heads/dev'){
+        console.log('上传完毕，响应push事件')
         run_cmd('sh',['./deplay-dev.sh'],text=>{
             console.log(text)
         })
