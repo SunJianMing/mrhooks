@@ -11,8 +11,11 @@ app.get('/api/list',(req,res)=>{
             name:'s',
             age:29
         },{
-            name:'jm',
+            name:'j',
             age:30
+        },{
+            name:'m',
+            age:31
         }]
     })
 })
