@@ -11,4 +11,6 @@ services:
     hook-test:
         container_name: hook-test
         restart: always
+        ports:
+            - 6000:6000
         build: ./backend
