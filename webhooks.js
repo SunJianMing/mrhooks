@@ -33,7 +33,7 @@ hander.on('error',err=>{
 })
 hander.on('push',(event)=>{
     console.log(event.payload)
-    if(event.payload.ref == 'refs/hook-test')
+    if(event.payload.ref == 'refs/hook')
     cun_cmd('sh',['./dev-deplay.sh'],text=>{
         console.log(text)
     })
