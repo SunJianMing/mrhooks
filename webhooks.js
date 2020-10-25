@@ -6,6 +6,16 @@ const hander = webHooks({
     secret:'mrsun'
 })
 const {spawn} = require('child_process')
+function cun_cmd(cmd,arg,call){
+    let child = spawn(cmd,arg)
+    let resultString = ''
+    child.stdout.on('data',chunk=>{
+        resultString += chunk.toString()
+    })
+    child.stdout.on('end',()=>{
+        call && call(resultString)
+    })
+}
 http.createServer((req,res)=>{
     hander(req,res,err=>{
         if(err){
@@ -17,16 +27,7 @@ http.createServer((req,res)=>{
     console.log('6666')
 })
 
-function cun_cmd(cmd,arg,call){
-    let child = spawn(cmd,arg)
-    let resultString = ''
-    child.stdout.on('data',chunk=>{
-        resultString += chunk.toString()
-    })
-    child.stdout.on('end',()=>{
-        call && call(resultString)
-    })
-}
+
 
 hander.on('error',err=>{
     console.Error("error",err.message)
@@ -34,7 +35,7 @@ hander.on('error',err=>{
 hander.on('push',(event)=>{
     console.log(event.payload.ref)
     if(event.payload.ref == 'refs/heads/hook')
-    cun_cmd('sh',['./dev-deplay.sh'],text=>{
+    cun_cmd('sh',['./deplay-dev.sh'],text=>{
         console.log(text)
     })
 })
