@@ -8,13 +8,13 @@ app.get('/',(req,res)=>{
 app.get('/api/list',(req,res)=>{
     res.json({
         code:[{
-            name:'ssssjm',
+            name:'s',
             age:29
         },{
-            name:'jdkkk',
+            name:'j',
             age:30
         },{
-            name:'mmm',
+            name:'m',
             age:31
         }]
     })
