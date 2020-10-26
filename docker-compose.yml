@@ -8,8 +8,8 @@ services:
         volumes:
             - ./nginx/conf.d:/etc/nginx/conf.d
             - ./frontend/dist:/home/hook1
-    hooks-test:
-        container_name: hooks-test
+    hook-test:
+        container_name: app-test
         build: ./backend
         ports:
             - 6000:6000
