@@ -3,7 +3,7 @@ services:
     nginx:
         image: nginx
         restart: always
-        prots:
+        ports:
             - 9099:80
         volumes:
             - ./nginx/conf.d:/etc/nginx/conf.d
