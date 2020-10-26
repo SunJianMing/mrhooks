@@ -2,5 +2,5 @@ apps:
     - script: app.js
       instances: 2
       watch: true
-      env:
+      evn:
         NODE_ENV: production

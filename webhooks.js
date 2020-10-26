@@ -1,38 +1,40 @@
 const http = require('http')
-const webHooks = require('github-webhook-handler')
+const webhooks = require('github-webhook-handler')
 const {spawn} = require('child_process')
 
-const handler = webHooks({
-    path:'/hook-test',
+const handler = webhooks({
+    path:'/hook1',
     secret:'mrsun'
 })
 function run_cmd(cmd,arg,call){
+    let resStr = ''
     let child = spawn(cmd,arg)
-    let resultString = ''
     child.stdout.on('data',chunk=>{
-        resultString += chunk.toString()
+        resStr += chunk.toString()
     })
     child.stdout.on('end',()=>{
-        call && call(resultString)
+        call && call(resStr)
     })
 }
 http.createServer((req,res)=>{
     handler(req,res,err=>{
         if(err){
             res.statusCode = 500
+            res.end('服务器错误')
         }
     })
-}).listen(6677,()=>{
-    console.log('start 6677')
+}).listen(6600,()=>{
+    console.log('start 6600')
 })
 
 handler.on('error',err=>{
-    console.error('Error',err.message);
+    if(err){
+        console.error("Error",err.message);
+    }
 })
-
-handler.on('push',(event)=>{
-    if(event.payload.ref === 'refs/heads/dev'){
-        console.log('上传完毕，响应push事件')
+handler.on('push',event=>{
+    if(event.payload.ref === 'refs/heads/hook'){
+        console.log('已提交到github,响应push事件')
         run_cmd('sh',['./deplay-dev.sh'],text=>{
             console.log(text)
         })

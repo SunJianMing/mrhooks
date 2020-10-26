@@ -1,15 +1,15 @@
-version: '3.1'
+version: '3'
 services:
     nginx:
         image: nginx
         restart: always
-        ports:
-            - 8088:80
+        prots:
+            - 9099:80
         volumes:
             - ./nginx/conf.d:/etc/nginx/conf.d
-            - ./frontend/dist:/home/hooks
-    hook-test:
-        container_name: hook-test
+            - ./frontend/dist:/home/hook1
+    hook1:
+        container_name: hook1
         build: ./backend
         ports:
             - 6000:6000
